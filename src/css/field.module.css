@@ -1,0 +1,23 @@
+.game-sector {
+	width: 200px;
+	height: 200px;
+	background-color: rgb(216, 138, 138);
+	border: solid white 1px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 120px;
+}
+.game-sector:hover {
+	cursor: pointer;
+}
+
+.field {
+	justify-content: center;
+	flex-wrap: wrap;
+	display: flex;
+	width: 606px;
+	height: 600px;
+	border: solid white 1px;
+	margin-bottom: 25px;
+}

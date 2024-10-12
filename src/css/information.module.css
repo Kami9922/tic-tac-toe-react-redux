@@ -1,0 +1,12 @@
+.information {
+	margin-bottom: 25px;
+	font-size: 48px;
+	border: solid white 1px;
+	width: 250px;
+	margin: 0 auto 25px auto;
+	border-radius: 15px;
+	padding: 5px;
+}
+.information-win {
+	background-color: #46af2b;
+}
