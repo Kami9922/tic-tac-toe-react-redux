@@ -1,4 +1,9 @@
-export const initialState = {};
+export const initialState = {
+	currentPlayer: "X",
+	field: ["", "", "", "", "", "", "", "", ""],
+	isDraw: false,
+	isGameEnded: false,
+};
 
 export const appReducer = (state = initialState, { type, payload }) => {
 	switch (type) {

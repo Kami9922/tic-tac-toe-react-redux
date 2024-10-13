@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import styles from "./../../css/field.module.css";
-import { store } from "../../store";
 import { WIN_PATTERNS } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentPlayer } from "../../selectors/select-currentPlayer";
+import { selectField } from "../../selectors/select-field";
+import { selectIsGameEnded } from "../../selectors/select-isGameEnded";
 
 const FieldLayout = () => {
-	const [state, setState] = useState(store.getState());
+	const currentPlayer = useSelector(selectCurrentPlayer);
+	const field = useSelector(selectField);
+	const isGameEnded = useSelector(selectIsGameEnded);
 
-	useEffect(() => {
-		const unsubscribe = store.subscribe(() => setState(store.getState()));
-		return unsubscribe;
-	}, []);
+	const dispatch = useDispatch();
 
 	const checkForDraw = (arrayToCheck) => {
 		if (!arrayToCheck.includes("")) {
-			store.dispatch({ type: "SET_IS_GAME_ENDED", payload: true });
-			store.dispatch({ type: "SET_IS_DRAW", payload: true });
+			dispatch({ type: "SET_IS_GAME_ENDED", payload: true });
+			dispatch({ type: "SET_IS_DRAW", payload: true });
 		}
 	};
 
 	return (
 		<div className={styles.field}>
-			{state.field?.map((item, index) => {
+			{field.map((item, index) => {
 				return (
 					<div
 						key={index}
 						className={styles["game-sector"]}
 						onClick={() => {
-							if (!state.isGameEnded && state.field[index] === "") {
-								const newField = [...state.field];
-								newField[index] = state.currentPlayer;
-								store.dispatch({ type: "SET_FIELD", payload: newField });
+							if (!isGameEnded && field[index] === "") {
+								const newField = [...field];
+								newField[index] = currentPlayer;
+								dispatch({ type: "SET_FIELD", payload: newField });
 								if (
 									WIN_PATTERNS.some((pattern) =>
-										pattern.every((index) => newField[index] === state.currentPlayer),
+										pattern.every((index) => newField[index] === currentPlayer),
 									)
 								) {
-									store.dispatch({ type: "SET_IS_GAME_ENDED", payload: true });
+									dispatch({ type: "SET_IS_GAME_ENDED", payload: true });
 								} else {
-									store.dispatch({
+									dispatch({
 										type: "SET_CURRENT_PLAYER",
-										payload: state.currentPlayer === "X" ? "O" : "X",
+										payload: currentPlayer === "X" ? "O" : "X",
 									});
 									checkForDraw(newField);
 								}
