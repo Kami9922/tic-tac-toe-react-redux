@@ -18,7 +18,7 @@ const Game = () => {
 		const randomNumber = getRandomNumber();
 		dispatch({
 			type: "SET_CURRENT_PLAYER",
-			payload: randomNumber === 1 ? "X" : "0",
+			payload: randomNumber === 1 ? "X" : "O",
 		});
 	}, [dispatch]);
 
