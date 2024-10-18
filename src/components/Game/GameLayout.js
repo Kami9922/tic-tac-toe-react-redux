@@ -2,9 +2,11 @@ import React from "react";
 import Information from "../Information/Information";
 import Field from "../Field/Field";
 import styles from "./../../css/game.module.css";
-import { store } from "../../store";
+import { useDispatch } from "react-redux";
 
 const GameLayout = () => {
+	const dispatch = useDispatch();
+
 	return (
 		<div>
 			<Information />
@@ -12,13 +14,13 @@ const GameLayout = () => {
 			<div
 				className={styles["reset-button"]}
 				onClick={() => {
-					store.dispatch({ type: "SET_CURRENT_PLAYER", payload: "X" });
-					store.dispatch({
+					dispatch({ type: "SET_CURRENT_PLAYER", payload: "X" });
+					dispatch({
 						type: "SET_FIELD",
 						payload: ["", "", "", "", "", "", "", "", ""],
 					});
-					store.dispatch({ type: "SET_IS_DRAW", payload: false });
-					store.dispatch({ type: "SET_IS_GAME_ENDED", payload: false });
+					dispatch({ type: "SET_IS_DRAW", payload: false });
+					dispatch({ type: "SET_IS_GAME_ENDED", payload: false });
 				}}
 			>
 				Начать заново
