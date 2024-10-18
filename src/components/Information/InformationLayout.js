@@ -5,7 +5,7 @@ const InformationLayout = () => {
 	let stateOfGameValue = useSelector((state) => state.stateOfGameValue);
 	return (
 		<div
-			className={`${styles.information} ${stateOfGameValue === `Победа` ? styles["information-win"] : ""}`}
+			className={`${styles.information} ${stateOfGameValue.includes(`Победа`) ? styles["information-win"] : ""}`}
 		>
 			{stateOfGameValue}
 		</div>
